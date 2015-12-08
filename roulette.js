@@ -1,6 +1,10 @@
 var roulette = (function() {
 
+    // Private Variables
+
     var wheel = [];
+    var recordedSpins = [];
+    var totalSpins = 0;
 
     function init() {
         wheel.push(
@@ -42,21 +46,35 @@ var roulette = (function() {
             {number: "36", color: "red"},
             {number: "0", color: "green"},
             {number: "00", color: "green"}
-        )
+        );
     }
 
     function spin() {
         var randomNumber = Math.floor((Math.random() * 38));
-        document.getElementById("spin-number").innerHTML = wheel[randomNumber].number;
-        document.getElementById("spin-color").innerHTML = wheel[randomNumber].color;
+        totalSpins++;
+        updateUICurrentSpin(wheel[randomNumber]);
+        addSpinToRecord(wheel[randomNumber]);
+
+    }
+
+    function updateUICurrentSpin(spin) {
+        document.getElementById("spin-number").innerHTML = spin.number;
+        document.getElementById("spin-color").innerHTML = spin.color;
+        document.getElementById("spins").innerHTML = totalSpins;
+    }
+
+    function addSpinToRecord(spin) {
+        recordedSpins.push(spin);
     }
 
     return {
         setup: init,
-        spin: spin
-    }
+        spin: spin,
+        recordedSpins: recordedSpins
+    };
 
 })();
 
 roulette.setup();
+roulette.spin();
 
