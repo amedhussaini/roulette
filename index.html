@@ -1,7 +1,55 @@
+<!DOCTYPE html>
+<htmL>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Roulette</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/artemis.css">
+  </head>
+  <body>
 
-<div id="spin-number"></div>
-<div id="spin-color"></div>
-<p>Spins</p>
-<div id="spins"></div>
-<p onclick="roulette.spin()">spin</p>
-<script src="roulette.js"></script>
+    <div id="spins"></div>
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <td id="current-spin-number"></td>
+          <td id="current-spin-color"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Bet</th>
+          <th>Hits</th>
+          <th>Probablity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Black</td>
+          <td id="count-black"></td>
+          <td id="probability-black"></td>
+        </tr>
+        <tr>
+          <td>Red</td>
+          <td id="count-red"></td>
+          <td id="probability-red"></td>
+        </tr>
+        <tr>
+          <td>Green</td>
+          <td id="count-green"></td>
+          <td id="probability-green"></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- This isn't ready yet
+    <canvas id="canvas" style="width:100px; height:100px;" width="15" height="15"></canvas>
+    -->
+    <button onclick="roulette.spin()">spin</button>
+    <script src="js/roulette.js"></script>
+  </body>
+</htmL>
+

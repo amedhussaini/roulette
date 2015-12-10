@@ -4,9 +4,15 @@ var roulette = (function() {
 
     var wheel = [];
     var recordedSpins = [];
+
     var totalSpins = 0;
 
+    var countRed = 0;
+    var countBlack = 0;
+    var countGreen = 0;
+
     function init() {
+        // American Roulette
         wheel.push(
             {number: "1", color: "red"},
             {number: "2", color: "black"},
@@ -51,20 +57,56 @@ var roulette = (function() {
 
     function spin() {
         var randomNumber = Math.floor((Math.random() * 38));
-        totalSpins++;
-        updateUICurrentSpin(wheel[randomNumber]);
         addSpinToRecord(wheel[randomNumber]);
+        updateUICurrentSpin(wheel[randomNumber]);
+
 
     }
 
     function updateUICurrentSpin(spin) {
-        document.getElementById("spin-number").innerHTML = spin.number;
-        document.getElementById("spin-color").innerHTML = spin.color;
+        document.getElementById("current-spin-number").innerHTML = spin.number;
+        document.getElementById("current-spin-color").innerHTML = spin.color;
+        document.getElementById("count-black").innerHTML = countBlack;
+        document.getElementById("count-red").innerHTML = countRed;
+        document.getElementById("count-green").innerHTML = countGreen;
+        document.getElementById("probability-black").innerHTML = (countBlack/totalSpins).toFixed(2);
+        document.getElementById("probability-red").innerHTML = (countRed/totalSpins).toFixed(2);
+        document.getElementById("probability-green").innerHTML = (countGreen/totalSpins).toFixed(2);
+        var node = null;
+        var style = null;
+
+        if (spin.color == "red") {
+
+            node = document.getElementById("current-spin-color");
+            style = node.style;
+            style.backgroundColor = "red";
+            style.color = "black";
+
+        } else if (spin.color == "black") {
+
+            node = document.getElementById("current-spin-color");
+            style = node.style;
+            style.backgroundColor = "black";
+            style.color ="red";
+        }
         document.getElementById("spins").innerHTML = totalSpins;
     }
 
     function addSpinToRecord(spin) {
         recordedSpins.push(spin);
+        totalSpins++;
+
+        if (spin.color == "red") {
+            countRed++;
+        }
+
+        if (spin.color == "black") {
+            countBlack++;
+        }
+
+        if (spin.color == "green") {
+            countGreen++;
+        }
     }
 
     return {
@@ -76,5 +118,25 @@ var roulette = (function() {
 })();
 
 roulette.setup();
-roulette.spin();
+
+var timer = setInterval(function(){
+    roulette.spin();
+}, 10);
+
+
+// eventually i'll build a carpet that shows the red black spread
+
+(function() {
+
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+
+//Background
+context.fillStyle = "#000";
+context.fillRect(0, 0, canvas.width, canvas.height);
+//Pixels
+context.fillStyle = "#ff3300";
+context.fillRect(0, 0, 1, 1);
+context.fillRect(1, 0, 1, 1);
+})();
 
