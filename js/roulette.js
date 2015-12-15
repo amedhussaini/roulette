@@ -10,6 +10,8 @@ var roulette = (function() {
     var countRed = 0;
     var countBlack = 0;
     var countGreen = 0;
+    var numberHits = []
+
 
     function init() {
         // American Roulette
@@ -107,6 +109,7 @@ var roulette = (function() {
         if (spin.color == "green") {
             countGreen++;
         }
+
     }
 
     return {
@@ -121,22 +124,22 @@ roulette.setup();
 
 var timer = setInterval(function(){
     roulette.spin();
-}, 10);
+}, 1000);
 
 
 // eventually i'll build a carpet that shows the red black spread
 
-(function() {
+//(function() {
 
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
+//var canvas = document.getElementById("canvas");
+//var context = canvas.getContext("2d");
 
 //Background
-context.fillStyle = "#000";
-context.fillRect(0, 0, canvas.width, canvas.height);
+//context.fillStyle = "#000";
+//context.fillRect(0, 0, canvas.width, canvas.height);
 //Pixels
-context.fillStyle = "#ff3300";
-context.fillRect(0, 0, 1, 1);
-context.fillRect(1, 0, 1, 1);
-})();
+//context.fillStyle = "#ff3300";
+//context.fillRect(0, 0, 1, 1);
+//context.fillRect(1, 0, 1, 1);
+//})();
 
